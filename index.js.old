@@ -1,0 +1,67 @@
+// Fonctionne avec fichier xls ou xlsx
+
+//chargement librairies xlsx et https
+const xlsx = require("xlsx");
+const https = require('https');
+//var fs = require('fs');
+const axios = require('axios');
+const options = { responseType: ArrayBuffer};
+
+var fichier = axios.get('https://api.notarly.fr/vault/aDBu5cfU/Fos3gbw5Ufb_YSnwpSLWjdh6aaQ/4UBPeQ../Format+des+donn%C3%A9es+attendu.xlsx',
+        {...options})
+        .then(response => {
+           console.log(`statusCode: ${response.status}`);
+           console.log(response.headers);
+           // console.log(response.data);
+          var wb = XLSX.read(response, {type:"buffer"});
+          //var workbook = XLSX.read(response, {type:"buffer"});
+            
+            /*Débug
+            //console.log(Object.keys(wb));
+            //console.log(wb.SheetNames);
+            //console.log(wb.Sheets);*/
+
+
+            //Lecture de la feuille 0 du fichier recuperé
+            const sheetName = wb.SheetNames[0];
+                   console.log (sheetName);
+            const ws = wb.Sheets[sheetName];
+           // console.log (ws);
+            const json =  xlsx.utils.sheet_to_json(ws, {type:"buffer"});
+            
+           console.log(json);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+//Lecture du fichier excel
+//const wb = xlsx.readFile(fichier.data);
+//const wb = xlsx.readFile('./Format des données attendu.xlsx');
+/*Débug
+//console.log(Object.keys(wb));
+//console.log(wb.SheetNames);
+//console.log(wb.Sheets);*/
+
+
+//Lecture de la feuille 0 du fichier recuperé
+//const sheetName = wb.SheetNames[0];
+//const ws = wb.Sheets[sheetName];
+/* Debug
+console.log(ws); */
+
+//Conversion de la donnée en format json
+//const json =  xlsx.utils.sheet_to_json(ws);
+// Debug
+//console.log(json);
+
+
+
+
+//console.log("récupération de l'url");
+//const options = new URL('https://api.notarly.fr/vault/aDBu5cfU/Fos3gbw5Ufb_YSnwpSLWjdh6aaQ/4UBPeQ../Format+des+donn%C3%A9es+attendu.xlsx'); 
+//console.log("téléchargement et lecture du fichier"); 
+//const req = https.request(options, (res) => { console.log("downloading..");wb = xlsx.readFile(request); });
+
+//console.log("hello world");
+

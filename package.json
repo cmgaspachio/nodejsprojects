@@ -1,0 +1,17 @@
+{
+  "name": "notarly",
+  "version": "1.0.0",
+  "description": "ProjetNotarly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "request": "^2.88.2",
+    "xls": "^0.5.1",
+    "xlsx": "^0.18.5"
+  }
+}
